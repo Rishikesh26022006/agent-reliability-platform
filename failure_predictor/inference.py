@@ -18,12 +18,18 @@ class FailurePredictor:
         self.model_dir = Path(model_dir)
         self.threshold = threshold
         
-        try:
-            self.tokenizer = AutoTokenizer.from_pretrained(str(self.model_dir))
-        except Exception:
-            self.tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+        # Robust loading: fallback to distilbert-base-uncased if local directory missing or invalid
+        base_model_name = "distilbert-base-uncased"
+        load_path = str(self.model_dir) if self.model_dir.exists() else base_model_name
 
-        self.model = AutoModelForSequenceClassification.from_pretrained(str(self.model_dir))
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(load_path)
+            self.model = AutoModelForSequenceClassification.from_pretrained(load_path)
+        except Exception as e:
+            print(f"Warning: Failed to load model from '{load_path}' ({e}). Falling back to '{base_model_name}'.")
+            self.tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+            self.model = AutoModelForSequenceClassification.from_pretrained(base_model_name)
+
         self.model.eval()
 
     def serialize_steps(self, steps: list) -> str:
