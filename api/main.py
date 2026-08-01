@@ -13,6 +13,8 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -37,6 +39,14 @@ runner = ReliableAgentRunner(risk_threshold=0.35)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TRAJ_DIR = PROJECT_ROOT / "data" / "trajectories"
 LABELS_FILE = PROJECT_ROOT / "data" / "auto_labels.json"
+FRONTEND_DIR = PROJECT_ROOT / "frontend"
+
+# Serve data files (for A/B results JSON)
+app.mount("/data", StaticFiles(directory=str(PROJECT_ROOT / "data")), name="data")
+
+@app.get("/", include_in_schema=False)
+def root():
+    return FileResponse(str(FRONTEND_DIR / "index.html"))
 
 
 class TicketRequest(BaseModel):
