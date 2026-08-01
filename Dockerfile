@@ -1,21 +1,17 @@
-# Agent Reliability Platform — Docker Image for Render
+# Agent Reliability Platform — Docker Image for Render (512MB RAM free tier)
 FROM python:3.12-slim
 
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8000
-
-# Install system build tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    PORT=8000 \
+    USE_LIGHTWEIGHT_PREDICTOR=true
 
 # Copy requirements file
 COPY requirements.txt .
 
-# Install dependencies using PyTorch CPU extra-index
+# Install lightweight production dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 

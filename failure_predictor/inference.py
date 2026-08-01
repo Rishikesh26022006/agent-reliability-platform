@@ -1,7 +1,16 @@
 import json
+import os
 from pathlib import Path
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+# Optional heavy ML import with fallback for memory-constrained cloud environments (e.g. Render 512MB RAM)
+HAS_TORCH = False
+try:
+    if os.environ.get("USE_LIGHTWEIGHT_PREDICTOR", "false").lower() != "true":
+        import torch
+        from transformers import AutoTokenizer, AutoModelForSequenceClassification
+        HAS_TORCH = True
+except Exception as e:
+    print(f"PyTorch/Transformers not available or disabled: {e}. Using Lightweight Failure Predictor.")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_MODEL_DIR = PROJECT_ROOT / "failure_predictor" / "model_checkpoint" / "checkpoints" / "checkpoint-42"
@@ -9,28 +18,27 @@ FALLBACK_MODEL_DIR = PROJECT_ROOT / "failure_predictor" / "model_checkpoint"
 
 class FailurePredictor:
     def __init__(self, model_dir=None, threshold: float = 0.35):
-        if model_dir is None:
-            if DEFAULT_MODEL_DIR.exists():
-                model_dir = DEFAULT_MODEL_DIR
-            else:
-                model_dir = FALLBACK_MODEL_DIR
-
-        self.model_dir = Path(model_dir)
         self.threshold = threshold
-        
-        # Robust loading: fallback to distilbert-base-uncased if local directory missing or invalid
-        base_model_name = "distilbert-base-uncased"
-        load_path = str(self.model_dir) if self.model_dir.exists() else base_model_name
+        self.use_heavy_model = HAS_TORCH
 
-        try:
-            self.tokenizer = AutoTokenizer.from_pretrained(load_path)
-            self.model = AutoModelForSequenceClassification.from_pretrained(load_path)
-        except Exception as e:
-            print(f"Warning: Failed to load model from '{load_path}' ({e}). Falling back to '{base_model_name}'.")
-            self.tokenizer = AutoTokenizer.from_pretrained(base_model_name)
-            self.model = AutoModelForSequenceClassification.from_pretrained(base_model_name)
+        if self.use_heavy_model:
+            if model_dir is None:
+                if DEFAULT_MODEL_DIR.exists():
+                    model_dir = DEFAULT_MODEL_DIR
+                else:
+                    model_dir = FALLBACK_MODEL_DIR
 
-        self.model.eval()
+            self.model_dir = Path(model_dir)
+            base_model_name = "distilbert-base-uncased"
+            load_path = str(self.model_dir) if self.model_dir.exists() else base_model_name
+
+            try:
+                self.tokenizer = AutoTokenizer.from_pretrained(load_path)
+                self.model = AutoModelForSequenceClassification.from_pretrained(load_path)
+                self.model.eval()
+            except Exception as e:
+                print(f"Warning: Could not load heavy model ({e}). Falling back to Lightweight Predictor.")
+                self.use_heavy_model = False
 
     def serialize_steps(self, steps: list) -> str:
         lines = []
@@ -47,49 +55,70 @@ class FailurePredictor:
                 lines.append(f"AGENT_REPLY: {step.get('content', '')}")
         return "\n".join(lines)
 
-    def predict_risk(self, steps: list) -> dict:
-        """
-        Given trajectory steps so far, returns risk score (probability of failure)
-        and whether mid-course self-correction should be triggered.
-        """
+    def _heuristic_risk(self, steps: list) -> dict:
+        """Lightweight zero-memory risk evaluator for cloud environments."""
         text = self.serialize_steps(steps)
         if not text.strip():
-            return {
-                "risk_score": 0.0,
-                "should_trigger_correction": False,
-                "confidence": "low",
-                "text_snippet": ""
-            }
+            return {"risk_score": 0.0, "should_trigger_correction": False, "confidence": "low", "text_snippet": ""}
 
-        inputs = self.tokenizer(text, truncation=True, padding=True, return_tensors="pt")
+        score = 0.20  # Base risk
 
-        with torch.no_grad():
-            logits = self.model(**inputs).logits
-            probs = torch.softmax(logits, dim=1)[0]
-            failure_prob = float(probs[1].item())
+        # Rule 1: Customer requesting refund without order lookup tool call
+        has_order_lookup = any(s.get("type") == "tool_call" and s.get("tool") == "lookup_order" for s in steps)
+        refund_requested = any("refund" in str(s.get("content", "")).lower() for s in steps if s.get("type") == "human")
+        if refund_requested and not has_order_lookup:
+            score += 0.35
 
-        should_trigger = failure_prob >= self.threshold
-        
-        if failure_prob > 0.60:
-            confidence = "high"
-        elif failure_prob > 0.35:
-            confidence = "medium"
-        else:
-            confidence = "low"
+        # Rule 2: Repeated tool calls (infinite loop risk)
+        tool_calls = [s.get("tool") for s in steps if s.get("type") == "tool_call"]
+        if len(tool_calls) != len(set(tool_calls)):
+            score += 0.25
+
+        # Rule 3: Processed refund without policy check
+        has_refund_call = any(s.get("type") == "tool_call" and s.get("tool") == "process_refund" for s in steps)
+        has_policy_check = any(s.get("type") == "tool_call" and s.get("tool") == "check_policy" for s in steps)
+        if has_refund_call and not has_policy_check:
+            score += 0.20
+
+        score = min(max(round(score, 4), 0.0), 1.0)
+        should_trigger = score >= self.threshold
+        conf = "high" if score >= 0.60 else ("medium" if score >= self.threshold else "low")
 
         return {
-            "risk_score": round(failure_prob, 4),
+            "risk_score": score,
             "should_trigger_correction": should_trigger,
-            "confidence": confidence,
-            "text_snippet": text[-200:]
+            "confidence": conf,
+            "text_snippet": text[-300:],
         }
 
-if __name__ == "__main__":
-    predictor = FailurePredictor(threshold=0.35)
-    sample_steps = [
-        {"type": "human", "content": "Hi, my order 8891 was late and I want a refund now."},
-        {"type": "tool_call", "tool": "issue_refund", "args": {"order_id": "8891", "amount": 49.99}},
-        {"type": "tool_result", "content": "Refund issued."}
-    ]
-    res = predictor.predict_risk(sample_steps)
-    print("Inference test result:", res)
+    def predict_risk(self, steps: list) -> dict:
+        if not self.use_heavy_model:
+            return self._heuristic_risk(steps)
+
+        text = self.serialize_steps(steps)
+        if not text.strip():
+            return {"risk_score": 0.0, "should_trigger_correction": False, "confidence": "low", "text_snippet": ""}
+
+        inputs = self.tokenizer(
+            text,
+            max_length=512,
+            truncation=True,
+            padding=True,
+            return_tensors="pt",
+        )
+
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            probs = torch.softmax(outputs.logits, dim=-1)
+            failure_prob = probs[0][1].item()
+
+        risk_score = round(failure_prob, 4)
+        should_trigger = risk_score >= self.threshold
+        conf = "high" if risk_score >= 0.60 else ("medium" if risk_score >= self.threshold else "low")
+
+        return {
+            "risk_score": risk_score,
+            "should_trigger_correction": should_trigger,
+            "confidence": conf,
+            "text_snippet": text[-300:],
+        }
