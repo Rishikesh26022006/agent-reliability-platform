@@ -647,6 +647,15 @@ function setGauge(score, conf) {
 }
 
 // ── Trajectories ─────────────────────────────────────────────────────────────
+function formatTs(ts) {
+  if (!ts) return '—';
+  if (typeof ts === 'number') {
+    const ms = ts < 1e11 ? ts * 1000 : ts;
+    return new Date(ms).toLocaleString();
+  }
+  return String(ts).slice(0,19).replace('T',' ');
+}
+
 async function loadTrajectories() {
   try {
     const data = await fetch(`${API}/trajectories?limit=100`).then(r=>r.json());
@@ -660,7 +669,7 @@ async function loadTrajectories() {
         <td style="color:var(--muted)">${t.step_count}</td>
         <td>${t.label_success===true?'<span class="badge badge-success">✓ Success</span>':t.label_success===false?'<span class="badge badge-fail">✗ Failure</span>':'<span class="badge badge-unknown">Unlabeled</span>'}</td>
         <td style="color:var(--muted);font-size:12px">${String(t.label_category||'—').replace(/_/g,' ')}</td>
-        <td style="color:var(--muted);font-size:12px">${String(t.timestamp||'').slice(0,19).replace('T',' ')}</td>
+        <td style="color:var(--muted);font-size:12px">${formatTs(t.timestamp)}</td>
       </tr>`).join('');
   } catch(e) { showApiError('all-traj-tbody', e); }
 }
