@@ -1,0 +1,202 @@
+[
+  {
+    "group": "A_baseline",
+    "query": "My order 8891 arrived broken. I need a refund.",
+    "trajectory_id": "traj_14eac136",
+    "response": "I've confirmed your order (Wireless Mouse) and processed a full refund of $24.99 for the broken item. You won't need to return it!",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 3510.4
+  },
+  {
+    "group": "B_treatment",
+    "query": "My order 8891 arrived broken. I need a refund.",
+    "trajectory_id": "traj_af966099",
+    "response": "I have verified your order details in our system and checked our store policy, which confirms that damaged items are eligible for a full refund. Your refund of $24.99 has already been successfully processed!",
+    "correction_triggered": true,
+    "risk_score": 0.5167,
+    "corrections": [
+      {
+        "risk_score": 0.5167,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 6288.3
+  },
+  {
+    "group": "A_baseline",
+    "query": "I'm so disappointed with my order. I've been a loyal customer. Please just give me my money back.",
+    "trajectory_id": "traj_cb484443",
+    "response": "Could you please provide your order ID so I can look up your details and help you with this?",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 752.0
+  },
+  {
+    "group": "B_treatment",
+    "query": "I'm so disappointed with my order. I've been a loyal customer. Please just give me my money back.",
+    "trajectory_id": "traj_f7f32230",
+    "response": "I completely understand your frustration, but I need your order ID to look up your details in our system first. Once you share that with me, I'll be happy to check the order and see how we can help!",
+    "correction_triggered": true,
+    "risk_score": 0.503,
+    "corrections": [
+      {
+        "risk_score": 0.503,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 1536.8
+  },
+  {
+    "group": "A_baseline",
+    "query": "My order 8891 still hasn't arrived after 3 weeks. It's way overdue.",
+    "trajectory_id": "traj_fd3d7f68",
+    "response": "According to our system, order 8891 (Wireless Mouse) was already delivered on July 18, 2026. \n\nIf you haven't received it yet, please check around your delivery location or with neighbors. If it's still missing, let me know and I can escalate this to our human support team to investigate further for you!",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 22049.8
+  },
+  {
+    "group": "B_treatment",
+    "query": "My order 8891 still hasn't arrived after 3 weeks. It's way overdue.",
+    "trajectory_id": "traj_fbe692d1",
+    "response": "I have re-verified the status of order 8891 in our system. The order shows as delivered on July 18, 2026. Because our system records it as successfully delivered, a refund for late delivery is not applicable under our current policy. \n\nIf you are certain you haven't received it, I can escalate this case to our human support team to assist you further. Would you like me to do that?",
+    "correction_triggered": true,
+    "risk_score": 0.5157,
+    "corrections": [
+      {
+        "risk_score": 0.5157,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 23041.0
+  },
+  {
+    "group": "A_baseline",
+    "query": "I ordered the wrong size. Can I get a refund?",
+    "trajectory_id": "traj_8b54fdf3",
+    "response": "I would be happy to help you with that! Could you please provide me with your order ID?",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 700.1
+  },
+  {
+    "group": "B_treatment",
+    "query": "I ordered the wrong size. Can I get a refund?",
+    "trajectory_id": "traj_7d23537a",
+    "response": "I understand, but I still need your order ID so I can look up your details and check the policy for you. What is your order ID?",
+    "correction_triggered": true,
+    "risk_score": 0.5023,
+    "corrections": [
+      {
+        "risk_score": 0.5023,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 1812.9
+  },
+  {
+    "group": "A_baseline",
+    "query": "I think someone fraudulently placed an order on my account (order 4432). I want this investigated.",
+    "trajectory_id": "traj_929b46b0",
+    "response": "I've escalated your case to our human support team (Ticket ID: ESC-3768) so they can investigate the fraudulent order claim for you. Someone will be in touch shortly!",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 2233.8
+  },
+  {
+    "group": "B_treatment",
+    "query": "I think someone fraudulently placed an order on my account (order 4432). I want this investigated.",
+    "trajectory_id": "traj_cce62e02",
+    "response": "I have already verified the order details using our system and, because you reported suspected fraud, I have successfully escalated the case to a human support agent (Ticket ID: ESC-5473) for a security review. They will assist you further with this matter.",
+    "correction_triggered": true,
+    "risk_score": 0.5142,
+    "corrections": [
+      {
+        "risk_score": 0.5142,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 3268.4
+  },
+  {
+    "group": "A_baseline",
+    "query": "Can you check order number 9999? Something seems off.",
+    "trajectory_id": "traj_e31f5053",
+    "response": "I couldn't find an order with the number 9999. Could you please double-check the order number and let me know?",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 38082.0
+  },
+  {
+    "group": "B_treatment",
+    "query": "Can you check order number 9999? Something seems off.",
+    "trajectory_id": "traj_cf4bd933",
+    "response": "I have checked for order number 9999 again, but it still cannot be found in our system. Please make sure the order number is correct so I can assist you further!",
+    "correction_triggered": true,
+    "risk_score": 0.5055,
+    "corrections": [
+      {
+        "risk_score": 0.5055,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 3447.7
+  },
+  {
+    "group": "A_baseline",
+    "query": "My order 1029 arrived but one item is wrong AND the package was damaged.",
+    "trajectory_id": "traj_61408429",
+    "response": "I have looked up your order (1029 for the Laptop Stand) and confirmed its delivery. Based on our policy for wrong and damaged items, I have successfully issued a full refund of $34.50 to your original payment method. You also do not need to worry about returning the item. \n\nWe are so sorry for the hassle with the damaged package and the wrong item, and we hope to provide a much better experience next time!",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 4636.7
+  },
+  {
+    "group": "B_treatment",
+    "query": "My order 1029 arrived but one item is wrong AND the package was damaged.",
+    "trajectory_id": "traj_c3cbdff7",
+    "response": "I have re-verified your order details and our store policies. Everything is in order, and your full refund of $34.50 has already been successfully processed. No further action is needed on your end!",
+    "correction_triggered": true,
+    "risk_score": 0.5202,
+    "corrections": [
+      {
+        "risk_score": 0.5202,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 7662.0
+  },
+  {
+    "group": "A_baseline",
+    "query": "What's the status of my order 4432?",
+    "trajectory_id": "traj_3b33684f",
+    "response": "Your order for the Bluetooth Headphones (Order #4432) is currently in transit and is expected to be delivered on July 25, 2026. Let me know if you need help with anything else!",
+    "correction_triggered": false,
+    "risk_score": null,
+    "latency_ms": 36915.4
+  },
+  {
+    "group": "B_treatment",
+    "query": "What's the status of my order 4432?",
+    "trajectory_id": "traj_282f5ac3",
+    "response": "Your order #4432 (Bluetooth Headphones) is still on its way and is scheduled for delivery on July 25, 2026. Let me know if you need help with anything else!",
+    "correction_triggered": true,
+    "risk_score": 0.5078,
+    "corrections": [
+      {
+        "risk_score": 0.5078,
+        "strategy": "reflect_and_verify",
+        "message": "Elevated failure risk detected. Injecting reflection directive to verify claims against tool data."
+      }
+    ],
+    "latency_ms": 3327.8
+  }
+]

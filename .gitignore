@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments — do NOT push venvs
+venv/
+.venv/
+env/
+C:/arp_venv/
+
+# Environment variables — NEVER push API keys
+.env
+*.env
+
+# Model checkpoints — large files, keep local
+model_checkpoint/
+runs/
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# Data files — trajectories and training data (large, regeneratable)
+data/trajectories/
+data/train.jsonl
+data/val.jsonl
+
+# Keep labels and A/B results — useful for reproducibility
+!data/auto_labels.json
+!data/ab_test_results.json
+
+# IDE and OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/

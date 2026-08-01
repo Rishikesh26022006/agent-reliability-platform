@@ -1,0 +1,255 @@
+{
+  "labels": {
+    "success": null,
+    "failure_category": "ERROR",
+    "reasoning": "'steps'"
+  },
+  "traj_03f6eace": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order details and appropriately escalated the fraud investigation request to human support, accurately communicating the ticket number and order details in its final response."
+  },
+  "traj_093533b6": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent verified the order details and checked the policy for wrong items before issuing a full refund. All information in the final response accurately matches the tool outputs, and the resolution followed the exact policy guidelines."
+  },
+  "traj_09fe6a97": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly checked the order status and immediately escalated the reported account compromise and unauthorized order to a human agent as warranted for fraud and security issues."
+  },
+  "traj_0e12a450": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly verified the order details, retrieved the appropriate 'wrong_item' policy, issued the full refund of $24.99, and accurately communicated the resolution to the customer."
+  },
+  "traj_0f8e02a7": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly asked the customer to provide their order ID before proceeding, as no order information was initially provided to perform a lookup or cancellation."
+  },
+  "traj_1565c315": {
+    "success": false,
+    "failure_category": "premature_resolution_without_verification",
+    "confidence": "high",
+    "reasoning": "The agent issued a full refund based on vague, emotional language ('sent garbage!') without clarifying the issue or confirming a specific, verifiable policy trigger like damaged goods."
+  },
+  "traj_176c5fd4": {
+    "success": false,
+    "failure_category": "premature_escalation",
+    "confidence": "high",
+    "reasoning": "The agent unnecessarily escalated a simple case to a human agent, despite having clear policy guidance indicating that the order is in transit and not eligible for a refund since it is not delayed past the allowed threshold."
+  },
+  "traj_1c2ae221": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up order 4432, verified the customer's claim against system data, and accurately informed the customer that the item is in transit and scheduled for delivery on July 25, 2026."
+  },
+  "traj_2195ed37": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the provided order ID and accurately informed the customer that the order was not found based on the tool result."
+  },
+  "traj_2209e680": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly verified the order details and delivery date, checked the appropriate damaged item policy, and executed the refund as allowed by policy guidelines."
+  },
+  "traj_295dccbb": {
+    "success": false,
+    "failure_category": "hallucinated_policy",
+    "confidence": "high",
+    "reasoning": "The agent claimed that the retrieved policy applies to 'accidental damage', but the tool output only provided the policy for 'change_of_mind'."
+  },
+  "traj_2bdc2dc5": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly used the lookup_order tool with the provided order ID and accurately informed the customer that the order was not found without hallucinating details or escalating prematurely."
+  },
+  "traj_2f16f177": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order details, checked the relevant policy for damaged items, verified the order qualified for a full refund without requiring a return ($24.99 < $50), and issued the refund accurately."
+  },
+  "traj_30e65939": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly retrieved the order information using lookup_order and accurately informed the customer that their package is in transit with a scheduled delivery date of July 25, 2026, which is not yet late."
+  },
+  "traj_32abaa94": {
+    "success": false,
+    "failure_category": "hallucinated_policy",
+    "confidence": "high",
+    "reasoning": "The agent invented an unsupported explanation that 'carriers can sometimes experience delays in updating their systems after delivery' to explain away contradicting tool data showing the status as 'in_transit'."
+  },
+  "traj_3545b992": {
+    "success": false,
+    "failure_category": "premature_resolution_without_verification",
+    "confidence": "high",
+    "reasoning": " reached a resolution and issued an immediate refund for Order 1029 before verifying that the item was unused and returned, violating the requirement stated in the change of mind policy."
+  },
+  "traj_3769652e": {
+    "success": false,
+    "failure_category": "premature_resolution_without_verification",
+    "confidence": "high",
+    "reasoning": "The agent issued an immediate refund for Order 1029 upon request, despite the policy requiring the item to be returned and confirmed unused before a refund can be granted."
+  },
+  "traj_3b4e78ca": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent verified order 1029, correctly identified that sending a downloadable tax invoice required human support assistance, and provided the exact ticket ID from the tool response."
+  },
+  "traj_3d45db11": {
+    "success": false,
+    "failure_category": "response_data_mismatch",
+    "confidence": "high",
+    "reasoning": "The agent correctly issued the refund for Order 1029 using the tool, but stated 'Order 1020' instead of 'Order 1029' in its final response to the customer."
+  },
+  "traj_3f4ad667": {
+    "success": false,
+    "failure_category": "premature_resolution_without_verification",
+    "confidence": "high",
+    "reasoning": "The agent processed a refund under the 'damaged_item' policy based on the customer's vague, emotional statement ('cheap piece of junk') without verifying whether the item was actually damaged or defective."
+  },
+  "traj_416f9f80": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order details and promptly escalated the customer's account breach and unauthorized charge claim to human support as required for security/fraud concerns."
+  },
+  "traj_4b1c59e7": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order details using the appropriate tool and accurately provided the customer with the tracking status and estimated delivery date matching the tool output."
+  },
+  "traj_53bf60fc": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent appropriately asked the customer for their order ID to gather necessary details before taking action."
+  },
+  "traj_5533b1f3": {
+    "success": null,
+    "failure_category": "ERROR",
+    "reasoning": "Error calling model 'gemini-3.6-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 13.06718422s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '13s'}]}}"
+  },
+  "traj_56e04de0": {
+    "success": null,
+    "failure_category": "ERROR",
+    "reasoning": "Error calling model 'gemini-3.6-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 37.288108337s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '37s'}]}}"
+  },
+  "traj_59a6edf7": {
+    "success": null,
+    "failure_category": "ERROR",
+    "reasoning": "Error calling model 'gemini-3.6-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 962.924802ms.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.6-flash', 'location': 'global'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '0s'}]}}"
+  },
+  "traj_5cc7d238": {
+    "success": null,
+    "failure_category": "ERROR",
+    "reasoning": "Error calling model 'gemini-3.6-flash' (RESOURCE_EXHAUSTED): 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.6-flash\\nPlease retry in 25.853653134s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.6-flash'}, 'quotaValue': '20'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '25s'}]}}"
+  },
+  "traj_7a9501fe": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order, checked the late delivery policy, and appropriately escalated the issue when the customer was upset about a delay that did not meet the automatic refund threshold."
+  },
+  "traj_7fb2f76b": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up both orders, checked the damaged item policy, successfully issued the appropriate refund for Order 1029 (under $50, no return required), and properly escalated the in-transit cancellation request for Order 4432. All actions and statements accurately reflect the tool outputs."
+  },
+  "traj_952a30b0": {
+    "success": false,
+    "failure_category": "unverified_claim",
+    "confidence": "high",
+    "reasoning": "The customer claimed the headphones were broken, but the agent issued a full refund immediately without checking whether the item's value was under $50 (policy stated no return required under $50, but the item was $79.99) or verifying the damage against policy requirements."
+  },
+  "traj_db3abbe8": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order, checked relevant policies for both change of mind and damaged items, and appropriately escalated the case because customer-inflicted accidental damage (dropping it down the stairs) falls outside standard policy coverage."
+  },
+  "traj_eb6128ad": {
+    "success": false,
+    "failure_category": "wrong_tool_selection",
+    "confidence": "high",
+    "reasoning": "The customer stated they were charged and received an item they did not want because the receipt said it was canceled, but the agent checked the policy for 'wrong_item' instead of an unauthorized charge or return/cancellation dispute, leading to an incorrect tool selection for the situation."
+  },
+  "traj_78850f33": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order, checked the relevant delivery policy, and appropriately escalated the missing package issue to a human agent since the tracking showed it as delivered. All details in the final response accurately match the tool outputs."
+  },
+  "traj_6e4dfaac": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly identified an account security issue involving unauthorized login attempts and appropriately escalated the case to a human agent, matching all tool outputs and returning an accurate response."
+  },
+  "traj_650cc326": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly addressed both customer issues by looking up the order, issuing the correct refund per the policy tool, and properly escalating the separate missing refund issue from the previous month."
+  },
+  "traj_e3781f91": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly identified a fraud/unauthorized purchase claim, checked the order details via the lookup tool, and appropriately escalated the case to a human agent, providing the correct ticket ID in the response without any policy violations or hallucinations."
+  },
+  "traj_b416f87b": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up Order 8891, verified the policy for a wrong item, successfully issued the correct refund amount ($24.99), and properly escalated the secondary issue regarding the missing refund from a previous order."
+  },
+  "traj_f90c5291": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly identified an unauthorized purchase/security concern, checked the order details via lookup_order, and appropriately escalated the case to human support as required."
+  },
+  "traj_efab86d2": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly looked up the order, identified that the customer's unusual demand (full refund plus keeping the item due to a price drop elsewhere) fell outside standard automated resolution paths, appropriately escalated the case, and accurately reported the details in the final response."
+  },
+  "traj_63ec0f0d": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The customer made a legal/financial threat (chargeback), and the agent correctly identified this as a warranted situation for human review by escalating the case via `escalate_to_human`. The final response accurately reflects the tool outputs without any hallucinations or data mismatches."
+  },
+  "traj_67f2ca88": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent correctly attempted to look up order 9982, received an 'Order not found' response from the tool, and accurately reported this back to the customer while asking them to verify the order number."
+  },
+  "traj_cd94eb49": {
+    "success": true,
+    "failure_category": null,
+    "confidence": "high",
+    "reasoning": "The agent appropriately asked for the necessary order ID to locate the customer's missing order before taking any further action. No tools were miscalled and no policies were violated."
+  }
+}
