@@ -1,16 +1,16 @@
-torch --index-url https://download.pytorch.org/whl/cpu
-transformers>=5.0.0
-datasets>=5.0.0
-scikit-learn>=1.9.0
-accelerate>=1.14.0
-langchain>=1.3.0
-langchain-core>=1.5.0
-langchain-google-genai>=4.0.0
-langgraph>=1.2.0
-python-dotenv>=1.0.0
-fastapi>=0.115.0
-uvicorn[standard]>=0.30.0
-streamlit>=1.40.0
-pandas>=2.0.0
-requests>=2.32.0
-pydantic>=2.7.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+transformers
+datasets
+scikit-learn
+accelerate
+langchain
+langchain-core
+langchain-google-genai
+langgraph
+python-dotenv
+fastapi
+uvicorn[standard]
+pandas
+requests
+pydantic

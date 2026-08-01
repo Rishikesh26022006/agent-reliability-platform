@@ -1,25 +1,29 @@
-# Agent Reliability Platform — Docker Image
+# Agent Reliability Platform — Docker Image for Render
 FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install system deps
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PORT=8000
+
+# Install system build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for cache efficiency
+# Copy requirements file
 COPY requirements.txt .
 
-# Install torch CPU build (no GPU needed), then everything else
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies using PyTorch CPU extra-index
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copy project files
 COPY . .
 
-# Expose FastAPI port
+# Expose default port
 EXPOSE 8000
 
-# Start the API
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start FastAPI server bound to Render's assigned PORT
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
