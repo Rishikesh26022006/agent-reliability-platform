@@ -322,7 +322,7 @@
   </nav>
   <div class="sidebar-status">
     <span class="status-dot"></span> API connected<br/>
-    <span style="font-size:11px;margin-left:13px;opacity:.6;">localhost:8000</span>
+    <span id="status-host" style="font-size:11px;margin-left:13px;opacity:.6;">online</span>
   </div>
 </aside>
 
@@ -492,7 +492,7 @@
 </main>
 
 <script>
-const API = 'http://localhost:8000';
+const API = window.location.origin;
 
 // ── Navigation ──────────────────────────────────────────────────────────────
 const PAGE_TITLES = {
@@ -783,10 +783,12 @@ async function loadABResults() {
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function showApiError(containerId, err) {
   const el = document.getElementById(containerId);
-  if (el) el.innerHTML = `<div class="empty"><div class="icon">⚠️</div><div style="color:var(--red)">${err.message}</div><div style="margin-top:8px;font-size:12px">Make sure FastAPI is running at localhost:8000</div></div>`;
+  if (el) el.innerHTML = `<div class="empty"><div class="icon">⚠️</div><div style="color:var(--red)">${err.message}</div><div style="margin-top:8px;font-size:12px">Make sure the API server is reachable</div></div>`;
 }
 
 // ── Init ─────────────────────────────────────────────────────────────────────
+const hostEl = document.getElementById('status-host');
+if (hostEl) hostEl.textContent = window.location.host;
 loadOverview();
 </script>
 </body>
